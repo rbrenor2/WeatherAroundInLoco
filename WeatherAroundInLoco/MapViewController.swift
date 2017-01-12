@@ -19,10 +19,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //
     var citiesArray = [City]()
     
+    //
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //Hide navigation bar
+        self.navigationController?.navigationBar.isHidden = true
+        //Hide activity indicator
+        self.activityIndicator.isHidden = true
         // Set long press to set the location
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.didLongPress(longPress:)))
         gestureRecognizer.minimumPressDuration = 0.5 //press is detected after 0.5 seconds
@@ -31,20 +38,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
 
     @IBAction func searchButton(_ sender: Any) {
-        //let appId = "42aa90839a45ca64f1066c806391c5fb"
+
         let appId = "524901&APPID=7cfd7b0b361c2bb7f58b1515691a7bc9"
         let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%.2f&lon=%.2f&cnt=%d"
         let numberOfCities = 15
         
-        DispatchQueue.global(qos: .background).async {
-            //Perform search
+        //Clean array
+        self.citiesArray.removeAll()
+        
+        //Enable activity indicator
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        
+        DispatchQueue.global(qos: .utility).async {
             print("#1 - searchButton - calls background queue to dispatch async")
-            //let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude, self.selectedCoordinate.longitude, numberOfCities])
+            
+            //Perform search
             let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude,self.selectedCoordinate.longitude, numberOfCities])
             print("#2 - searchButton - urlString: %@", urlString)
+            
             let domainURL = URL(string: urlString as String)
             var jsonData:Data
             
+            //Try download jsonData
             do{
                 jsonData = try! Data(contentsOf: domainURL!)
                 print("#3 - searchButton - jsonData download")
@@ -54,19 +70,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 print("#4 - searchButton - gettingDataERROR: %@",error)
             }
             
+            //Try serialize download Json data
             var jsonSerializedDictionary:Dictionary<String, Any>
             
             do{
                 jsonSerializedDictionary = try! JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
-                print("#5 - searchButton - jsonData Serialization\n")
-                print(jsonSerializedDictionary)
-                
+                print("#5 - searchButton - jsonData Serialization", jsonSerializedDictionary)
             }
             catch{
                 print("#6 - searchButton - deserializingJSONERROR: %@",error)
             }
             
-            //Json into Objects using the names in the jSON structure
+            //Turn Json into Objects using the names in the jSON structure
             let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
             
             for case let city as NSDictionary in list{
@@ -89,7 +104,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             DispatchQueue.main.async {
-                //Perform segue
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
                 self.performSegue(withIdentifier: "citiesTableSegue", sender: self)
             }
         }
@@ -99,8 +115,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
    
     
     func didLongPress(longPress:UIGestureRecognizer){
-        
-        
+    
         if(longPress.state == UIGestureRecognizerState.began){
             
             //Remove previous annotations
@@ -115,7 +130,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             let newAnnotation:MKAnnotation = Annotation(coordinate:self.selectedCoordinate)
             self.mapView.addAnnotation(newAnnotation)
             print("#2 - didLongPress - Annotation added")
-
         }
 
     }
@@ -123,9 +137,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationSegue : CitiesTableViewController = CitiesTableViewController()
+        let destinationSegue : CitiesTableViewController = segue.destination as! CitiesTableViewController 
         destinationSegue.citiesArray = citiesArray
-        // Pass the selected object to the new view controller.
         
     }
 
