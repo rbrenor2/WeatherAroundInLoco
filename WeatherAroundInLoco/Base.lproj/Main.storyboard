@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oGE-BT-zrW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -26,24 +26,25 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-3T-VpE">
-                                <rect key="frame" x="163" y="615" width="48" height="30"/>
+                                <rect key="frame" x="163" y="617" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Buscar"/>
                                 <connections>
-                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k3E-B8-HNq"/>
+                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yJ3-zz-XQb"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XQM-DQ-3md"/>
                     <connections>
                         <outlet property="mapView" destination="tS4-3h-7Nb" id="ZIy-K6-bCe"/>
-                        <segue destination="oGE-BT-zrW" kind="presentation" identifier="citiesTableSegue" id="5gS-HY-7gT"/>
+                        <segue destination="FY8-Gk-usV" kind="presentation" identifier="citiesTableSegue" id="nR7-IL-D1I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="85.599999999999994" y="38.23088455772114"/>
+            <point key="canvasLocation" x="830" y="36"/>
         </scene>
         <!--City Table View Controller-->
         <scene sceneID="MuS-cL-LAX">
@@ -91,7 +92,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grJ-r5-gDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1671" y="37"/>
+            <point key="canvasLocation" x="1647" y="36"/>
         </scene>
         <!--Cities Navigation View Controller-->
         <scene sceneID="Bit-2T-YeJ">
@@ -102,12 +103,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="FY8-Gk-usV" kind="relationship" relationship="rootViewController" id="NrK-oK-Bvi"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="AUo-q5-525"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GpK-9a-NU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="36"/>
+            <point key="canvasLocation" x="34" y="36"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="gjA-Co-rvu">

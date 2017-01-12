@@ -9,7 +9,6 @@
 import UIKit
 import MapKit
 import CoreLocation
-import Foundation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -18,7 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var selectedCoordinate = CLLocationCoordinate2D()
     //
-    var citiesArray = [String]()
+    var citiesArray = [City]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,46 +31,80 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
 
     @IBAction func searchButton(_ sender: Any) {
-        
-        let appId = "42aa90839a45ca64f1066c806391c5fb"
-        let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%@&lon=%@&cnt=%d"
+        //let appId = "42aa90839a45ca64f1066c806391c5fb"
+        let appId = "524901&APPID=7cfd7b0b361c2bb7f58b1515691a7bc9"
+        let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%.2f&lon=%.2f&cnt=%d"
         let numberOfCities = 15
         
         DispatchQueue.global(qos: .background).async {
             //Perform search
-            let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude, self.selectedCoordinate.longitude, numberOfCities])
-            let domainURL = URL(string: urlString)
+            print("#1 - searchButton - calls background queue to dispatch async")
+            //let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude, self.selectedCoordinate.longitude, numberOfCities])
+            let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude,self.selectedCoordinate.longitude, numberOfCities])
+            print("#2 - searchButton - urlString: %@", urlString)
+            let domainURL = URL(string: urlString as String)
             var jsonData:Data
-                
+            
             do{
                 jsonData = try! Data(contentsOf: domainURL!)
+                print("#3 - searchButton - jsonData download")
+                
             }
             catch{
-                print("#1 - searchButton - gettingDataERROR: %@",error)
+                print("#4 - searchButton - gettingDataERROR: %@",error)
             }
             
-            var jsonDeserializedArray:Dictionary<String, Any>
+            var jsonSerializedDictionary:Dictionary<String, Any>
             
             do{
-                jsonDeserializedArray = try! JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
+                jsonSerializedDictionary = try! JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
+                print("#5 - searchButton - jsonData Serialization\n")
+                print(jsonSerializedDictionary)
+                
             }
             catch{
-                print("#2 - searchButton - deserializingJSONERROR: %@",error)
+                print("#6 - searchButton - deserializingJSONERROR: %@",error)
             }
             
+            //Json into Objects using the names in the jSON structure
+            let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
             
-
+            for case let city as NSDictionary in list{
+                let name:String = city.object(forKey: "name") as! String
+                let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
+                let minTemperature:NSNumber = main.object(forKey: "temp_min") as! NSNumber
+                let maxTemperature:NSNumber = main.object(forKey: "temp_max") as! NSNumber
+                
+                
+                let weather:NSArray = city.object(forKey: "weather") as! NSArray
+                let weatherProperties:NSDictionary = weather[0] as! NSDictionary
+                let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
+                
+                let newCity = City(cityName: name, cityMin: minTemperature, cityMax: maxTemperature, cityDescription: weatherDescription)
+                
+                print("#7 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:", newCity.cityMax, "description:", newCity.cityDescription)
+                
+                //append to the array of Cities
+                self.citiesArray.append(newCity)
+            }
             
             DispatchQueue.main.async {
-            //Perform segue
-            self.performSegue(withIdentifier: "citiesTableSegue", sender: self)
+                //Perform segue
+                self.performSegue(withIdentifier: "citiesTableSegue", sender: self)
             }
         }
-        
+
     }
     
+   
+    
     func didLongPress(longPress:UIGestureRecognizer){
+        
+        
         if(longPress.state == UIGestureRecognizerState.began){
+            
+            //Remove previous annotations
+            self.mapView.removeAnnotations(self.mapView.annotations)
             
             //Get the coordinates
             let touchPoint:CGPoint = longPress.location(in: self.mapView)
@@ -84,17 +117,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             print("#2 - didLongPress - Annotation added")
 
         }
-        else{
-            print("#3 - didLongPress - longPress not detected")
-        }
-        
-        
+
     }
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationSegue : CitiesNavigationViewController = CitiesNavigationViewController()
+        let destinationSegue : CitiesTableViewController = CitiesTableViewController()
         destinationSegue.citiesArray = citiesArray
         // Pass the selected object to the new view controller.
         

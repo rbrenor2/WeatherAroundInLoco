@@ -17,7 +17,6 @@
 		708B2B901E26365C005B9069 /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B8F1E26365C005B9069 /* CitiesTableViewController.swift */; };
 		708B2B921E263680005B9069 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B911E263680005B9069 /* DetailViewController.swift */; };
 		708B2B941E2636FD005B9069 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B931E2636FD005B9069 /* City.swift */; };
-		708B2B991E2645E2005B9069 /* CitiesNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B981E2645E2005B9069 /* CitiesNavigationViewController.swift */; };
 		70E969581E2718DF00E9290B /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E969571E2718DF00E9290B /* Annotation.swift */; };
 		70F369C21E26F97A00C0800C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F369C11E26F97A00C0800C /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -56,7 +55,6 @@
 		708B2B8F1E26365C005B9069 /* CitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesTableViewController.swift; sourceTree = "<group>"; };
 		708B2B911E263680005B9069 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		708B2B931E2636FD005B9069 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		708B2B981E2645E2005B9069 /* CitiesNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesNavigationViewController.swift; sourceTree = "<group>"; };
 		70E969571E2718DF00E9290B /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		70F369C11E26F97A00C0800C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -142,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				708B2B8D1E2635DF005B9069 /* MapViewController.swift */,
-				708B2B981E2645E2005B9069 /* CitiesNavigationViewController.swift */,
 				708B2B8F1E26365C005B9069 /* CitiesTableViewController.swift */,
 				708B2B911E263680005B9069 /* DetailViewController.swift */,
 			);
@@ -321,7 +318,6 @@
 				708B2B601E26356F005B9069 /* AppDelegate.swift in Sources */,
 				708B2B941E2636FD005B9069 /* City.swift in Sources */,
 				708B2B8E1E2635DF005B9069 /* MapViewController.swift in Sources */,
-				708B2B991E2645E2005B9069 /* CitiesNavigationViewController.swift in Sources */,
 				708B2B901E26365C005B9069 /* CitiesTableViewController.swift in Sources */,
 				70E969581E2718DF00E9290B /* Annotation.swift in Sources */,
 				708B2B921E263680005B9069 /* DetailViewController.swift in Sources */,

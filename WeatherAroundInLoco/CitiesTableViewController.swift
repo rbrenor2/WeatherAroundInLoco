@@ -10,7 +10,7 @@ import UIKit
 
 class CitiesTableViewController: UITableViewController {
     
-    var citiesArray = [String]()
+    var citiesArray = [City]()
     
 
     override func viewDidLoad() {
@@ -37,7 +37,8 @@ class CitiesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 15
+        print("#1 - numberOfRowsInSections - array range:", citiesArray.count)
+        return citiesArray.count
     }
 
     
@@ -45,7 +46,7 @@ class CitiesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = citiesArray[indexPath.row]
+        cell.textLabel?.text = citiesArray[indexPath.row].cityName
 
         return cell
     }
