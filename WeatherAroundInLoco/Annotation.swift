@@ -11,8 +11,9 @@ import MapKit
 
 class Annotation: NSObject, MKAnnotation{
     
-    var coordinate: CLLocationCoordinate2D
+    let coordinate: CLLocationCoordinate2D
     
-    override class func initialize (coordinates) {
+    init (coordinate:CLLocationCoordinate2D) {
+        self.coordinate = coordinate
     }
 }

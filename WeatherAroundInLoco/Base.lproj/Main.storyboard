@@ -37,7 +37,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="tS4-3h-7Nb" id="NNf-F3-upM"/>
+                        <outlet property="mapView" destination="tS4-3h-7Nb" id="ZIy-K6-bCe"/>
                         <segue destination="oGE-BT-zrW" kind="presentation" identifier="citiesTableSegue" id="5gS-HY-7gT"/>
                     </connections>
                 </viewController>
