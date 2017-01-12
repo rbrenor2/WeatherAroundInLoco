@@ -18,6 +18,8 @@
 		708B2B921E263680005B9069 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B911E263680005B9069 /* DetailViewController.swift */; };
 		708B2B941E2636FD005B9069 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B931E2636FD005B9069 /* City.swift */; };
 		708B2B991E2645E2005B9069 /* CitiesNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B981E2645E2005B9069 /* CitiesNavigationViewController.swift */; };
+		70E969581E2718DF00E9290B /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E969571E2718DF00E9290B /* Annotation.swift */; };
+		70F369C21E26F97A00C0800C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F369C11E26F97A00C0800C /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		708B2B911E263680005B9069 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		708B2B931E2636FD005B9069 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		708B2B981E2645E2005B9069 /* CitiesNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesNavigationViewController.swift; sourceTree = "<group>"; };
+		70E969571E2718DF00E9290B /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		70F369C11E26F97A00C0800C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70F369C21E26F97A00C0800C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +94,7 @@
 				708B2B731E26356F005B9069 /* WeatherAroundInLocoTests */,
 				708B2B7E1E26356F005B9069 /* WeatherAroundInLocoUITests */,
 				708B2B5D1E26356F005B9069 /* Products */,
+				70F369C01E26F97A00C0800C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				708B2B931E2636FD005B9069 /* City.swift */,
+				70E969571E2718DF00E9290B /* Annotation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -159,6 +166,14 @@
 				708B2B681E26356F005B9069 /* LaunchScreen.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		70F369C01E26F97A00C0800C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70F369C11E26F97A00C0800C /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +246,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3Y69BC5249;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					708B2B6F1E26356F005B9069 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -303,6 +323,7 @@
 				708B2B8E1E2635DF005B9069 /* MapViewController.swift in Sources */,
 				708B2B991E2645E2005B9069 /* CitiesNavigationViewController.swift in Sources */,
 				708B2B901E26365C005B9069 /* CitiesTableViewController.swift in Sources */,
+				70E969581E2718DF00E9290B /* Annotation.swift in Sources */,
 				708B2B921E263680005B9069 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,8 +474,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
 				INFOPLIST_FILE = WeatherAroundInLoco/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brenor2.WeatherAroundInLoco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,8 +489,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
 				INFOPLIST_FILE = WeatherAroundInLoco/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = brenor2.WeatherAroundInLoco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -552,6 +577,7 @@
 				708B2B861E26356F005B9069 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		708B2B871E26356F005B9069 /* Build configuration list for PBXNativeTarget "WeatherAroundInLocoTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +586,7 @@
 				708B2B891E26356F005B9069 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		708B2B8A1E26356F005B9069 /* Build configuration list for PBXNativeTarget "WeatherAroundInLocoUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +595,7 @@
 				708B2B8C1E26356F005B9069 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
