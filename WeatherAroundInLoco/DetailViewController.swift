@@ -29,8 +29,8 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         self.navigationController?.navigationBar.isHidden = false
         
         self.title = cityName
-        cityMinLabel.text = cityMin
-        cityMaxLabel.text = cityMax
+        cityMinLabel.text = cityMin + " " + "℃"
+        cityMaxLabel.text = cityMax + " " + "℃"
         cityDescriptionLabel.text = cityDescription
     }
     

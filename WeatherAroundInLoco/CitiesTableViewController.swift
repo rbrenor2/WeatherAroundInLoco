@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CitiesTableViewController: UITableViewController{
     
     var citiesArray = [City]()
@@ -22,10 +21,17 @@ class CitiesTableViewController: UITableViewController{
         //Show navigation bar
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = true
+        
+        //Show alert if the citiesArray has no cities
+        if(citiesArray.count == 0){
+            ErrorHandler.errorAlert(message:ErrorType.noCitiesFoundError.rawValue , viewController: self)
+        }
+        
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.tableView.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -55,6 +61,7 @@ class CitiesTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print("#1 - numberOfRowsInSections - array range:", citiesArray.count)
+        
         return citiesArray.count
     }
 
@@ -87,6 +94,7 @@ class CitiesTableViewController: UITableViewController{
             destinationViewController.cityName = selectedCity.cityName
             destinationViewController.cityMin = NSString(format:"%.1f", selectedCity.cityMin) as String
             destinationViewController.cityMax = NSString(format:"%.1f", selectedCity.cityMax) as String
+            
             destinationViewController.cityDescription = selectedCity.cityDescription
         }
        

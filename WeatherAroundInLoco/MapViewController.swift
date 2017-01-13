@@ -10,10 +10,14 @@ import UIKit
 import MapKit
 import CoreLocation
 
+
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     //
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var buttonBackgroundView: UIView!
+    
     var locationManager = CLLocationManager()
     var selectedCoordinate = CLLocationCoordinate2D()
     //
@@ -26,8 +30,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //Hide navigation bar
-        self.navigationController?.navigationBar.isHidden = true
+        // Show navigation bar with instructions
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
+            
+            self.navigationController?.navigationBar.isTranslucent = true
+            self.navigationController?.navigationBar.topItem?.title = "Toque e segure para escolher a região"
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        })
+        
         //Hide activity indicator
         self.activityIndicator.isHidden = true
         // Set long press to set the location
@@ -36,73 +50,95 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addGestureRecognizer(gestureRecognizer)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        //
+        self.searchButton.isHidden = false
+        
+        //Navigation bar with instructions
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: {
+            
+            self.navigationController?.navigationBar.isTranslucent = true
+            self.navigationController?.navigationBar.topItem?.title = "Toque e segure para escolher a região"
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            
+        })
+    }
+    
 
-    @IBAction func searchButton(_ sender: Any) {
+    @IBAction func searchButton(_ sender: UIButton) {
 
         let appId = "524901&APPID=7cfd7b0b361c2bb7f58b1515691a7bc9"
         let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%.2f&lon=%.2f&cnt=%d"
         let numberOfCities = 15
         
+        //Check internet connectivity
+        if Reachability.isConnectedToNetwork() == true {
+            print("#1 - searchButton - Internet check - is OK!")
+        } else {
+            print("#2 - searchButton - Internet check - no Connection!")
+            ErrorHandler.errorAlert(message:ErrorType.noInternetError.rawValue , viewController: self)
+            return
+        }
+        
         //Clean array
         self.citiesArray.removeAll()
         
-        //Enable activity indicator
+        //Enable activity indicator and hide search button
+        UIView.animate(withDuration: 0.2, animations: {
+            self.buttonBackgroundView.transform.scaledBy(x: 0, y: 500)
+            
+            print("ERA PRA ANIMAR?!?!?!?")
+        })
+        
+        sender.isHidden = true
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         
-        DispatchQueue.global(qos: .utility).async {
-            print("#1 - searchButton - calls background queue to dispatch async")
+        DispatchQueue.global(qos: .userInitiated).async {
+            print("#3 - searchButton - calls background queue to dispatch async")
             
             //Perform search
             let urlString = String(format: apiCall, arguments: [appId, self.selectedCoordinate.latitude,self.selectedCoordinate.longitude, numberOfCities])
-            print("#2 - searchButton - urlString: %@", urlString)
+            
+            print("#4 - searchButton - urlString: %@", urlString)
             
             let domainURL = URL(string: urlString as String)
-            var jsonData:Data
+            var jsonData:Data? = nil
             
             //Try download jsonData
-            do{
-                jsonData = try! Data(contentsOf: domainURL!)
-                print("#3 - searchButton - jsonData download")
+
+            jsonData = try! Data(contentsOf: domainURL!)
+            if(jsonData != nil ){
+                var jsonSerializedDictionary:Dictionary<String, Any>
                 
+                jsonSerializedDictionary = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
+                print("#6 - searchButton - jsonData Serialization", jsonSerializedDictionary)
+                
+                //Turn Json into Objects using the names in the jSON structure
+                let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
+                for case let city as NSDictionary in list{
+                    let name:String = city.object(forKey: "name") as! String
+                    let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
+                    let minTemperature:Float = main.object(forKey: "temp_min") as! Float
+                    let maxTemperature:Float = main.object(forKey: "temp_max") as! Float
+                    
+                    let weather:NSArray = city.object(forKey: "weather") as! NSArray
+                    let weatherProperties:NSDictionary = weather[0] as! NSDictionary
+                    let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
+                    
+                    let newCity = City(cityName: name, cityMin: self.convertToCelsius(temperatureInFarenheit: minTemperature), cityMax: self.convertToCelsius(temperatureInFarenheit: maxTemperature), cityDescription: weatherDescription)
+                    
+                    print("#8 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:",         newCity.cityMax, "description:", newCity.cityDescription)
+                    
+                    //append to the array of Cities
+                    self.citiesArray.append(newCity)
+
             }
-            catch{
-                print("#4 - searchButton - gettingDataERROR: %@",error)
-            }
+            print("#5 - searchButton - jsonData download")
             
             //Try serialize download Json data
-            var jsonSerializedDictionary:Dictionary<String, Any>
-            
-            do{
-                jsonSerializedDictionary = try! JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
-                print("#5 - searchButton - jsonData Serialization", jsonSerializedDictionary)
-            }
-            catch{
-                print("#6 - searchButton - deserializingJSONERROR: %@",error)
-            }
-            
-            //Turn Json into Objects using the names in the jSON structure
-            let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
-            
-            for case let city as NSDictionary in list{
-                let name:String = city.object(forKey: "name") as! String
-                let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
-                let minTemperature:Float = main.object(forKey: "temp_min") as! Float
-                let maxTemperature:Float = main.object(forKey: "temp_max") as! Float
-                
-                
-                let weather:NSArray = city.object(forKey: "weather") as! NSArray
-                let weatherProperties:NSDictionary = weather[0] as! NSDictionary
-                let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
-                
-                let newCity = City(cityName: name, cityMin: self.convertToCelsius(temperatureInFarenheit: minTemperature), cityMax: self.convertToCelsius(temperatureInFarenheit: maxTemperature), cityDescription: weatherDescription)
-                
-                print("#7 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:", newCity.cityMax, "description:", newCity.cityDescription)
-                
-                //append to the array of Cities
-                self.citiesArray.append(newCity)
-            }
-            
+                       }
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
