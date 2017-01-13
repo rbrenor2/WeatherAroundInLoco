@@ -16,12 +16,24 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var cityMinLabel: UILabel!
     @IBOutlet weak var cityDescriptionLabel: UILabel!
     
+    var cityName:String = ""
+    var cityMin:String = ""
+    var cityMax:String = ""
+    var cityDescription:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.isHidden = false
+        
+        
+        self.title = cityName
+        cityMinLabel.text = cityMin
+        cityMaxLabel.text = cityMax
+        cityDescriptionLabel.text = cityDescription
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

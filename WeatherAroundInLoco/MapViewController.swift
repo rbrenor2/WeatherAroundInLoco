@@ -87,15 +87,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             for case let city as NSDictionary in list{
                 let name:String = city.object(forKey: "name") as! String
                 let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
-                let minTemperature:NSNumber = main.object(forKey: "temp_min") as! NSNumber
-                let maxTemperature:NSNumber = main.object(forKey: "temp_max") as! NSNumber
+                let minTemperature:Float = main.object(forKey: "temp_min") as! Float
+                let maxTemperature:Float = main.object(forKey: "temp_max") as! Float
                 
                 
                 let weather:NSArray = city.object(forKey: "weather") as! NSArray
                 let weatherProperties:NSDictionary = weather[0] as! NSDictionary
                 let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
                 
-                let newCity = City(cityName: name, cityMin: minTemperature, cityMax: maxTemperature, cityDescription: weatherDescription)
+                let newCity = City(cityName: name, cityMin: self.convertToCelsius(temperatureInFarenheit: minTemperature), cityMax: self.convertToCelsius(temperatureInFarenheit: maxTemperature), cityDescription: weatherDescription)
                 
                 print("#7 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:", newCity.cityMax, "description:", newCity.cityDescription)
                 
@@ -110,6 +110,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
 
+    }
+    
+    func convertToCelsius(temperatureInFarenheit:Float)->Float{
+        let temperatureInCelsius = temperatureInFarenheit - 273
+        
+        return temperatureInCelsius
     }
     
    
@@ -137,8 +143,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
-        let destinationSegue : CitiesTableViewController = segue.destination as! CitiesTableViewController 
-        destinationSegue.citiesArray = citiesArray
+        let destinationViewController : CitiesTableViewController = segue.destination as! CitiesTableViewController
+        destinationViewController.citiesArray = citiesArray
         
     }
 

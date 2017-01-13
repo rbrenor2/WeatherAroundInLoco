@@ -10,11 +10,11 @@ import UIKit
 
 class City: NSObject {
     let cityName:String
-    let cityMin:NSNumber
-    let cityMax:NSNumber
+    let cityMin:Float
+    let cityMax:Float
     let cityDescription:String
     
-    init(cityName:String, cityMin:NSNumber, cityMax:NSNumber, cityDescription:String) {
+    init(cityName:String, cityMin:Float, cityMax:Float, cityDescription:String) {
         self.cityName = cityName
         self.cityMax = cityMax
         self.cityMin = cityMin
