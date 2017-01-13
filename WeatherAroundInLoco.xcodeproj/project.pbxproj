@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700E31071E28789F009C8A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700E31061E28789F009C8A7A /* Main.storyboard */; };
+		704948C11E2863A1008F8702 /* InLocoMediaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */; };
+		704948C51E286FE3008F8702 /* AdViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704948C41E286FE3008F8702 /* AdViewViewController.swift */; };
 		708B2B601E26356F005B9069 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B5F1E26356F005B9069 /* AppDelegate.swift */; };
-		708B2B651E26356F005B9069 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708B2B631E26356F005B9069 /* Main.storyboard */; };
 		708B2B671E26356F005B9069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 708B2B661E26356F005B9069 /* Assets.xcassets */; };
 		708B2B6A1E26356F005B9069 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708B2B681E26356F005B9069 /* LaunchScreen.storyboard */; };
 		708B2B751E26356F005B9069 /* WeatherAroundInLocoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B741E26356F005B9069 /* WeatherAroundInLocoTests.swift */; };
@@ -39,9 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		700E31061E28789F009C8A7A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InLocoMediaAPI.framework; sourceTree = "<group>"; };
+		704948C41E286FE3008F8702 /* AdViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdViewViewController.swift; path = ../AdViewViewController.swift; sourceTree = "<group>"; };
 		708B2B5C1E26356F005B9069 /* WeatherAroundInLoco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAroundInLoco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708B2B5F1E26356F005B9069 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		708B2B641E26356F005B9069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		708B2B661E26356F005B9069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		708B2B691E26356F005B9069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		708B2B6B1E26356F005B9069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				704948C11E2863A1008F8702 /* InLocoMediaAPI.framework in Frameworks */,
 				70F369C21E26F97A00C0800C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +144,7 @@
 		708B2B951E263750005B9069 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				704948C41E286FE3008F8702 /* AdViewViewController.swift */,
 				708B2B8D1E2635DF005B9069 /* MapViewController.swift */,
 				708B2B8F1E26365C005B9069 /* CitiesTableViewController.swift */,
 				708B2B911E263680005B9069 /* DetailViewController.swift */,
@@ -158,7 +164,7 @@
 		708B2B971E263773005B9069 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				708B2B631E26356F005B9069 /* Main.storyboard */,
+				700E31061E28789F009C8A7A /* Main.storyboard */,
 				708B2B661E26356F005B9069 /* Assets.xcassets */,
 				708B2B681E26356F005B9069 /* LaunchScreen.storyboard */,
 			);
@@ -168,6 +174,7 @@
 		70F369C01E26F97A00C0800C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */,
 				70F369C11E26F97A00C0800C /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -288,9 +295,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				700E31071E28789F009C8A7A /* Main.storyboard in Resources */,
 				708B2B6A1E26356F005B9069 /* LaunchScreen.storyboard in Resources */,
 				708B2B671E26356F005B9069 /* Assets.xcassets in Resources */,
-				708B2B651E26356F005B9069 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				708B2B601E26356F005B9069 /* AppDelegate.swift in Sources */,
+				704948C51E286FE3008F8702 /* AdViewViewController.swift in Sources */,
 				708B2B941E2636FD005B9069 /* City.swift in Sources */,
 				708B2B8E1E2635DF005B9069 /* MapViewController.swift in Sources */,
 				708B2B901E26365C005B9069 /* CitiesTableViewController.swift in Sources */,
@@ -356,14 +364,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		708B2B631E26356F005B9069 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				708B2B641E26356F005B9069 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		708B2B681E26356F005B9069 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -418,6 +418,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -460,6 +464,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -472,6 +480,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WeatherAroundInLoco/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -487,6 +499,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = WeatherAroundInLoco/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

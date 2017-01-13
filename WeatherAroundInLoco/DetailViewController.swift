@@ -8,13 +8,14 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UINavigationControllerDelegate {
 
     
-    @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var cityMaxLabel: UILabel!
     @IBOutlet weak var cityMinLabel: UILabel!
     @IBOutlet weak var cityDescriptionLabel: UILabel!
+    
+    //Ad View
     
     var cityName:String = ""
     var cityMin:String = ""
@@ -27,13 +28,15 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.isHidden = false
         
-        
         self.title = cityName
         cityMinLabel.text = cityMin
         cityMaxLabel.text = cityMax
         cityDescriptionLabel.text = cityDescription
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

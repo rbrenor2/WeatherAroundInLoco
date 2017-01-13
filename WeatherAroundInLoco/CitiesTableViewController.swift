@@ -8,10 +8,13 @@
 
 import UIKit
 
-class CitiesTableViewController: UITableViewController {
+
+class CitiesTableViewController: UITableViewController{
     
     var citiesArray = [City]()
     var selectedCityIndex:NSInteger = 0
+    
+    //Variable holds if its the first time that the controller is being called
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +22,22 @@ class CitiesTableViewController: UITableViewController {
         //Show navigation bar
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.isTranslucent = true
-
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
+        
+        self.navigationController?.navigationBar.isHidden = false
+
+    }
+    
+    func methodOfReceivedNotification(notification:Notification){
+        self.performSegue(withIdentifier: "showAdSegue", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +64,9 @@ class CitiesTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = citiesArray[indexPath.row].cityName
+//        cell.detailTextLabel?.text = String(format:"%.0f", citiesArray[indexPath.row].cityMax)
+        cell.detailTextLabel?.text = citiesArray[indexPath.row].cityDescription
+
 
         return cell
     }
@@ -63,13 +80,16 @@ class CitiesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let destinationViewController:DetailViewController = segue.destination as! DetailViewController
-        let selectedCity:City = citiesArray[(self.tableView.indexPathForSelectedRow?.row)!]
-        
-        destinationViewController.cityName = selectedCity.cityName
-        destinationViewController.cityMin = NSString(format:"%.1f", selectedCity.cityMin) as String
-        destinationViewController.cityMax = NSString(format:"%.1f", selectedCity.cityMax) as String
-        destinationViewController.cityDescription = selectedCity.cityDescription
+        if(segue.destination is DetailViewController){
+            let destinationViewController:DetailViewController = segue.destination as! DetailViewController
+            let selectedCity:City = citiesArray[(self.tableView.indexPathForSelectedRow?.row)!]
+            
+            destinationViewController.cityName = selectedCity.cityName
+            destinationViewController.cityMin = NSString(format:"%.1f", selectedCity.cityMin) as String
+            destinationViewController.cityMax = NSString(format:"%.1f", selectedCity.cityMax) as String
+            destinationViewController.cityDescription = selectedCity.cityDescription
+        }
+       
     }
   
 

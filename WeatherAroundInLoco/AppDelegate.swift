@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InLocoMediaAPI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let options = ILMOptions()
+        options.logEnabled = true
+        options.developmentDevices = ["988307407c2341efccd16d55f630f61d635f52bd"]
+        options.adsKey = "c56a58c66dde5034e9c2645335a463730ef4ecaadd0e09d069a4f584f6288eed"
+        
+        InLocoMedia.initWith(options)
+        
         return true
     }
 
