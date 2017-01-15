@@ -21,17 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tS4-3h-7Nb">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tS4-3h-7Nb">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B2Q-Bh-xPy">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2Q-Bh-xPy">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-3T-VpE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-3T-VpE">
                                         <rect key="frame" x="163" y="10" width="48" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Buscar">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -39,15 +36,35 @@
                                             <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yJ3-zz-XQb"/>
                                         </connections>
                                     </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="MDu-NM-vxa">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="MDu-NM-vxa">
                                         <rect key="frame" x="177" y="15" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Zm6-3T-VpE" firstAttribute="top" secondItem="B2Q-Bh-xPy" secondAttribute="top" constant="10" id="9Wc-Xg-2xv"/>
+                                    <constraint firstItem="Zm6-3T-VpE" firstAttribute="centerY" secondItem="B2Q-Bh-xPy" secondAttribute="centerY" id="PnH-c9-xUs"/>
+                                    <constraint firstItem="Zm6-3T-VpE" firstAttribute="centerX" secondItem="MDu-NM-vxa" secondAttribute="centerX" id="XTE-Cf-vBV"/>
+                                    <constraint firstItem="Zm6-3T-VpE" firstAttribute="centerY" secondItem="MDu-NM-vxa" secondAttribute="centerY" id="dbH-tJ-kjJ"/>
+                                    <constraint firstItem="Zm6-3T-VpE" firstAttribute="centerX" secondItem="B2Q-Bh-xPy" secondAttribute="centerX" id="exu-CX-dBj"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tS4-3h-7Nb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="98e-tt-19X"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tS4-3h-7Nb" secondAttribute="bottom" id="BlT-bk-ZOU"/>
+                            <constraint firstItem="tS4-3h-7Nb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CDT-ae-zT8"/>
+                            <constraint firstAttribute="trailing" secondItem="tS4-3h-7Nb" secondAttribute="trailing" id="Grk-Iw-x4o"/>
+                            <constraint firstItem="tS4-3h-7Nb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Mfq-fm-z6g"/>
+                            <constraint firstItem="B2Q-Bh-xPy" firstAttribute="leading" secondItem="tS4-3h-7Nb" secondAttribute="leading" id="UYN-uf-Rb4"/>
+                            <constraint firstItem="B2Q-Bh-xPy" firstAttribute="bottom" secondItem="tS4-3h-7Nb" secondAttribute="bottom" id="VCS-GE-gwq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="B2Q-Bh-xPy" secondAttribute="bottom" id="ZD5-oW-tbB"/>
+                            <constraint firstItem="tS4-3h-7Nb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ffF-9k-gyq"/>
+                            <constraint firstAttribute="trailing" secondItem="B2Q-Bh-xPy" secondAttribute="trailing" id="hPq-KJ-TrW"/>
+                            <constraint firstItem="B2Q-Bh-xPy" firstAttribute="centerX" secondItem="tS4-3h-7Nb" secondAttribute="centerX" id="k1Y-iM-4rA"/>
+                            <constraint firstItem="B2Q-Bh-xPy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yAR-s2-9y7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XQM-DQ-3md"/>
                     <connections>
