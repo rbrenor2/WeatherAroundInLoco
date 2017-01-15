@@ -11,6 +11,7 @@ import UIKit
 
 enum ErrorType:String{
     case noInternetError = "Ops! Cheque sua conexão e tente novamente."
+    case couldNotDownloadDataError = "Houve algum problema em nossos servidores. Tente novamente."
     case genericError = "Vish! Deu um erro feioso. Tente de novo."
     case noCitiesFoundError = "Nenhuma cidade próxima encontrada."
 }

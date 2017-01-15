@@ -69,16 +69,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-
     @IBAction func searchButton(_ sender: UIButton) {
 
         let appId = "524901&APPID=7cfd7b0b361c2bb7f58b1515691a7bc9"
         let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%.2f&lon=%.2f&cnt=%d"
         let numberOfCities = 15
-        
+        let latDelta:CLLocationDegrees = 2
+        let lonDelta:CLLocationDegrees = 2
         
         //zoom in the selected region
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(2, 2)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
         let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.selectedCoordinate.latitude, self.selectedCoordinate.longitude)
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         self.mapView.setRegion(region, animated: true)
@@ -98,7 +98,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         //Enable activity indicator and hide search button
         UIView.animate(withDuration: 0.2, animations: {
             self.buttonBackgroundView.transform.scaledBy(x: 0, y: 500)
-            
             print("ERA PRA ANIMAR?!?!?!?")
         })
         
@@ -115,41 +114,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             print("#4 - searchButton - urlString: %@", urlString)
             
             let domainURL = URL(string: urlString as String)
-            var jsonData:Data? = nil
+            var jsonData:Data!
             
             //Try download jsonData
-
-            jsonData = try! Data(contentsOf: domainURL!)
-            if(jsonData != nil ){
-                var jsonSerializedDictionary:Dictionary<String, Any>
+            do{
+                jsonData = try Data(contentsOf: domainURL!)
+            }catch _{
+                ErrorHandler.errorAlert(message: ErrorType.couldNotDownloadDataError.rawValue, viewController: self)
+                return
+            }
+            var jsonSerializedDictionary:Dictionary<String, Any>
+            
+            //Try Json parse
+            do{
+               jsonSerializedDictionary = try JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
+            }catch _{
+                ErrorHandler.errorAlert(message: ErrorType.genericError.rawValue, viewController: self)
+                return
+            }
+            
+            print("#6 - searchButton - jsonData Serialization", jsonSerializedDictionary)
                 
-                jsonSerializedDictionary = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any>
-                print("#6 - searchButton - jsonData Serialization", jsonSerializedDictionary)
+            //Turn Json into Objects using the names in the jSON structure
+            let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
+            
+            for case let city as NSDictionary in list{
+                let name:String = city.object(forKey: "name") as! String
+                let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
+                let minTemperature:Float = main.object(forKey: "temp_min") as! Float
+                let maxTemperature:Float = main.object(forKey: "temp_max") as! Float
                 
-                //Turn Json into Objects using the names in the jSON structure
-                let list:Array<Any> = jsonSerializedDictionary["list"] as! Array
-                for case let city as NSDictionary in list{
-                    let name:String = city.object(forKey: "name") as! String
-                    let main:NSDictionary = city.object(forKey: "main") as! NSDictionary
-                    let minTemperature:Float = main.object(forKey: "temp_min") as! Float
-                    let maxTemperature:Float = main.object(forKey: "temp_max") as! Float
+                let weather:NSArray = city.object(forKey: "weather") as! NSArray
+                let weatherProperties:NSDictionary = weather[0] as! NSDictionary
+                let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
+                
+                let newCity = City(cityName: name, cityMin: self.convertToCelsius(temperatureInFarenheit: minTemperature), cityMax: self.convertToCelsius(temperatureInFarenheit: maxTemperature), cityDescription: weatherDescription)
+                
+                print("#8 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:",         newCity.cityMax, "description:", newCity.cityDescription)
                     
-                    let weather:NSArray = city.object(forKey: "weather") as! NSArray
-                    let weatherProperties:NSDictionary = weather[0] as! NSDictionary
-                    let weatherDescription:String = weatherProperties.object(forKey: "description") as! String
-                    
-                    let newCity = City(cityName: name, cityMin: self.convertToCelsius(temperatureInFarenheit: minTemperature), cityMax: self.convertToCelsius(temperatureInFarenheit: maxTemperature), cityDescription: weatherDescription)
-                    
-                    print("#8 - searchButton - newCity:",newCity.cityName, "minTemp:", newCity.cityMin, "maxTemp:",         newCity.cityMax, "description:", newCity.cityDescription)
-                    
-                    //append to the array of Cities
-                    self.citiesArray.append(newCity)
-
-                }
+                //Append to the array of Cities
+                self.citiesArray.append(newCity)
+            }
             print("#5 - searchButton - jsonData download")
             
             //Try serialize download Json data
-            }
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
@@ -157,7 +165,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 self.performSegue(withIdentifier: "citiesTableSegue", sender: self)
             }
         }
-
     }
     
     func convertToCelsius(temperatureInFarenheit:Float)->Float{
