@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		700E31071E28789F009C8A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 700E31061E28789F009C8A7A /* Main.storyboard */; };
+		70180C0A1E2C0778005E523D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C091E2C0778005E523D /* AdSupport.framework */; };
+		70180C0C1E2C0781005E523D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C0B1E2C0781005E523D /* CoreLocation.framework */; };
+		70180C0E1E2C078B005E523D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C0D1E2C078B005E523D /* Foundation.framework */; };
+		70180C101E2C0795005E523D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C0F1E2C0795005E523D /* SystemConfiguration.framework */; };
+		70180C121E2C079E005E523D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C111E2C079E005E523D /* UIKit.framework */; };
+		70180C141E2C07AA005E523D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C131E2C07AA005E523D /* CoreTelephony.framework */; };
+		70180C171E2C07B9005E523D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C151E2C07B9005E523D /* EventKit.framework */; };
+		70180C181E2C07B9005E523D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C161E2C07B9005E523D /* EventKitUI.framework */; };
+		70180C1A1E2C07C4005E523D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C191E2C07C4005E523D /* MediaPlayer.framework */; };
 		704948C11E2863A1008F8702 /* InLocoMediaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */; };
 		704948C51E286FE3008F8702 /* AdViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704948C41E286FE3008F8702 /* AdViewViewController.swift */; };
 		705A2E591E295E6A005F8547 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705A2E581E295E6A005F8547 /* Reachability.swift */; };
@@ -44,6 +53,15 @@
 
 /* Begin PBXFileReference section */
 		700E31061E28789F009C8A7A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		70180C091E2C0778005E523D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		70180C0B1E2C0781005E523D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		70180C0D1E2C078B005E523D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		70180C0F1E2C0795005E523D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		70180C111E2C079E005E523D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		70180C131E2C07AA005E523D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		70180C151E2C07B9005E523D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		70180C161E2C07B9005E523D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		70180C191E2C07C4005E523D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InLocoMediaAPI.framework; sourceTree = "<group>"; };
 		704948C41E286FE3008F8702 /* AdViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdViewViewController.swift; path = ../AdViewViewController.swift; sourceTree = "<group>"; };
 		705A2E581E295E6A005F8547 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -72,6 +90,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70180C1A1E2C07C4005E523D /* MediaPlayer.framework in Frameworks */,
+				70180C171E2C07B9005E523D /* EventKit.framework in Frameworks */,
+				70180C181E2C07B9005E523D /* EventKitUI.framework in Frameworks */,
+				70180C141E2C07AA005E523D /* CoreTelephony.framework in Frameworks */,
+				70180C121E2C079E005E523D /* UIKit.framework in Frameworks */,
+				70180C101E2C0795005E523D /* SystemConfiguration.framework in Frameworks */,
+				70180C0E1E2C078B005E523D /* Foundation.framework in Frameworks */,
+				70180C0C1E2C0781005E523D /* CoreLocation.framework in Frameworks */,
+				70180C0A1E2C0778005E523D /* AdSupport.framework in Frameworks */,
 				704948C11E2863A1008F8702 /* InLocoMediaAPI.framework in Frameworks */,
 				70F369C21E26F97A00C0800C /* MapKit.framework in Frameworks */,
 			);
@@ -180,6 +207,15 @@
 		70F369C01E26F97A00C0800C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				70180C191E2C07C4005E523D /* MediaPlayer.framework */,
+				70180C151E2C07B9005E523D /* EventKit.framework */,
+				70180C161E2C07B9005E523D /* EventKitUI.framework */,
+				70180C131E2C07AA005E523D /* CoreTelephony.framework */,
+				70180C111E2C079E005E523D /* UIKit.framework */,
+				70180C0F1E2C0795005E523D /* SystemConfiguration.framework */,
+				70180C0D1E2C078B005E523D /* Foundation.framework */,
+				70180C0B1E2C0781005E523D /* CoreLocation.framework */,
+				70180C091E2C0778005E523D /* AdSupport.framework */,
 				704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */,
 				70F369C11E26F97A00C0800C /* MapKit.framework */,
 			);

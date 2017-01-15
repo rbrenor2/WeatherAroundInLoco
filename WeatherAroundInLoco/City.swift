@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class City: NSObject {
     let cityName:String

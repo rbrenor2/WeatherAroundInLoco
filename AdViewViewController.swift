@@ -9,6 +9,15 @@
 import UIKit
 import InLocoMediaAPI
 
+
+//- (void)ilmAdViewWillLeaveApplication:(ILMAdView *)adView;
+//- (BOOL)ilmAdViewWillPerformClick:(ILMAdView *)adView;
+//- (void)ilmAdViewExpanded:(ILMAdView *)adView;
+//- (void)ilmAdViewResized:(ILMAdView *)adView;
+
+//- (void)presentFromViewController:(UIViewController *)viewController;
+
+
 class AdViewViewController: UIViewController, ILMInterstitialAdDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -19,6 +28,9 @@ class AdViewViewController: UIViewController, ILMInterstitialAdDelegate {
         // Do any additional setup after loading the view.
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
+        
+        //
+        self.interstitialAdView.refreshInterval()
     }
     
     func createAd(){
@@ -46,16 +58,17 @@ class AdViewViewController: UIViewController, ILMInterstitialAdDelegate {
         print("#2 - ilmInterstitialAdDidDisappear - AdViewController dismissed")
     }
     
-    func ilmInterstitialAdViewWillLeaveApplication(_ interstitialAd: ILMInterstitialAd!) {
-        self.navigationController?.navigationBar.isHidden = false
+    func ilmInterstitialAd(_ adView: ILMInterstitialAd!, didFailToReceiveAdWithError error: ILMError!) {
         self.dismiss(animated: true, completion: nil)
-        print("#3 - ilmInterstitialAdWillLeaveApplication - AdViewController dismissed")
-
+        print("#3 - didFailToReceiveAdWithError - AdViewController dismissed")
     }
     
-    func ilmInterstitialAd(_ adView: ILMInterstitialAd!, didFailToReceiveAdWithError error: ILMError!) {
-        print("TEVE ERRO EM RECEBER AD POR ISSO NAO APARECEU NADA!")
+    func ilmInterstitialAdViewWillLeaveApplication(_ interstitialAd: ILMInterstitialAd!) {
+        
+        print("#4 - ilmInterstitialAdViewWillLeaveApplication - AdViewController dismissed")
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

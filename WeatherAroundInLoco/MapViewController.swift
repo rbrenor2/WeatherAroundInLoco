@@ -42,6 +42,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         })
         
+        //
+        self.mapView.showsUserLocation = true
+
+        
         //Hide activity indicator
         self.activityIndicator.isHidden = true
         // Set long press to set the location
@@ -71,6 +75,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let appId = "524901&APPID=7cfd7b0b361c2bb7f58b1515691a7bc9"
         let apiCall = "http://api.openweathermap.org/data/2.5/find?id=%@&lat=%.2f&lon=%.2f&cnt=%d"
         let numberOfCities = 15
+        
+        
+        //zoom in the selected region
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(2, 2)
+        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.selectedCoordinate.latitude, self.selectedCoordinate.longitude)
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        self.mapView.setRegion(region, animated: true)
         
         //Check internet connectivity
         if Reachability.isConnectedToNetwork() == true {
@@ -134,14 +145,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     //append to the array of Cities
                     self.citiesArray.append(newCity)
 
-            }
+                }
             print("#5 - searchButton - jsonData download")
             
             //Try serialize download Json data
-                       }
+            }
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
+                
                 self.performSegue(withIdentifier: "citiesTableSegue", sender: self)
             }
         }
