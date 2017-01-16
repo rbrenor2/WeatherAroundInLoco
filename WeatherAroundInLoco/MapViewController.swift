@@ -94,11 +94,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.citiesArray.removeAll()
         
         //Enable activity indicator and hide search button
-        UIView.animate(withDuration: 0.2, animations: {
-            self.buttonBackgroundView.transform.scaledBy(x: 0, y: 500)
-            print("ERA PRA ANIMAR?!?!?!?")
-        })
-        
         sender.isHidden = true
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
