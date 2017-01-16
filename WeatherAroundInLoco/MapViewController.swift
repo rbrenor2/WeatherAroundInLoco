@@ -84,10 +84,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.setRegion(region, animated: true)
         
         //Check internet connectivity
-        if Reachability.isConnectedToNetwork() == true {
-            print("#1 - searchButton - Internet check - is OK!")
-        } else {
-            print("#2 - searchButton - Internet check - no Connection!")
+        if(Reachability.isConnectedToNetwork() == false) {
+            print("#1 - searchButton - Internet check - no Connection!")
             ErrorHandler.errorAlert(message:ErrorType.noInternetError.rawValue , viewController: self)
             return
         }

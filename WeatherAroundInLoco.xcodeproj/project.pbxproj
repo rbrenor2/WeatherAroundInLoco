@@ -17,13 +17,18 @@
 		70180C171E2C07B9005E523D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C151E2C07B9005E523D /* EventKit.framework */; };
 		70180C181E2C07B9005E523D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C161E2C07B9005E523D /* EventKitUI.framework */; };
 		70180C1A1E2C07C4005E523D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70180C191E2C07C4005E523D /* MediaPlayer.framework */; };
+		70415A711E2C492C006302B1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70415A701E2C492C006302B1 /* Launch Screen.storyboard */; };
+		70415A771E2C4989006302B1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70415A721E2C4989006302B1 /* Default-568h@2x.png */; };
+		70415A781E2C4989006302B1 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70415A731E2C4989006302B1 /* Default-667h@2x.png */; };
+		70415A791E2C4989006302B1 /* Default-Portrait-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70415A741E2C4989006302B1 /* Default-Portrait-736h@3x.png */; };
+		70415A7A1E2C4989006302B1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 70415A751E2C4989006302B1 /* Default.png */; };
+		70415A7B1E2C4989006302B1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 70415A761E2C4989006302B1 /* Default@2x.png */; };
 		704948C11E2863A1008F8702 /* InLocoMediaAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */; };
 		704948C51E286FE3008F8702 /* AdViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704948C41E286FE3008F8702 /* AdViewViewController.swift */; };
 		705A2E591E295E6A005F8547 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705A2E581E295E6A005F8547 /* Reachability.swift */; };
 		705A2E5B1E2963B7005F8547 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705A2E5A1E2963B7005F8547 /* ErrorHandler.swift */; };
 		708B2B601E26356F005B9069 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B5F1E26356F005B9069 /* AppDelegate.swift */; };
 		708B2B671E26356F005B9069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 708B2B661E26356F005B9069 /* Assets.xcassets */; };
-		708B2B6A1E26356F005B9069 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708B2B681E26356F005B9069 /* LaunchScreen.storyboard */; };
 		708B2B751E26356F005B9069 /* WeatherAroundInLocoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B741E26356F005B9069 /* WeatherAroundInLocoTests.swift */; };
 		708B2B801E26356F005B9069 /* WeatherAroundInLocoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B7F1E26356F005B9069 /* WeatherAroundInLocoUITests.swift */; };
 		708B2B8E1E2635DF005B9069 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B2B8D1E2635DF005B9069 /* MapViewController.swift */; };
@@ -62,6 +67,12 @@
 		70180C151E2C07B9005E523D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		70180C161E2C07B9005E523D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		70180C191E2C07C4005E523D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		70415A701E2C492C006302B1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		70415A721E2C4989006302B1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Assets.xcassets/LaunchImage.launchimage/Default-568h@2x.png"; sourceTree = "<group>"; };
+		70415A731E2C4989006302B1 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-667h@2x.png"; path = "Assets.xcassets/LaunchImage.launchimage/Default-667h@2x.png"; sourceTree = "<group>"; };
+		70415A741E2C4989006302B1 /* Default-Portrait-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait-736h@3x.png"; path = "Assets.xcassets/LaunchImage.launchimage/Default-Portrait-736h@3x.png"; sourceTree = "<group>"; };
+		70415A751E2C4989006302B1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Assets.xcassets/LaunchImage.launchimage/Default.png; sourceTree = "<group>"; };
+		70415A761E2C4989006302B1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Assets.xcassets/LaunchImage.launchimage/Default@2x.png"; sourceTree = "<group>"; };
 		704948C01E2863A1008F8702 /* InLocoMediaAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InLocoMediaAPI.framework; sourceTree = "<group>"; };
 		704948C41E286FE3008F8702 /* AdViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdViewViewController.swift; path = ../AdViewViewController.swift; sourceTree = "<group>"; };
 		705A2E581E295E6A005F8547 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -69,7 +80,6 @@
 		708B2B5C1E26356F005B9069 /* WeatherAroundInLoco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAroundInLoco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708B2B5F1E26356F005B9069 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		708B2B661E26356F005B9069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		708B2B691E26356F005B9069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		708B2B6B1E26356F005B9069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		708B2B701E26356F005B9069 /* WeatherAroundInLocoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAroundInLocoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		708B2B741E26356F005B9069 /* WeatherAroundInLocoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAroundInLocoTests.swift; sourceTree = "<group>"; };
@@ -198,8 +208,13 @@
 			isa = PBXGroup;
 			children = (
 				700E31061E28789F009C8A7A /* Main.storyboard */,
+				70415A701E2C492C006302B1 /* Launch Screen.storyboard */,
+				70415A721E2C4989006302B1 /* Default-568h@2x.png */,
+				70415A731E2C4989006302B1 /* Default-667h@2x.png */,
+				70415A741E2C4989006302B1 /* Default-Portrait-736h@3x.png */,
+				70415A751E2C4989006302B1 /* Default.png */,
+				70415A761E2C4989006302B1 /* Default@2x.png */,
 				708B2B661E26356F005B9069 /* Assets.xcassets */,
-				708B2B681E26356F005B9069 /* LaunchScreen.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -337,9 +352,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70415A7B1E2C4989006302B1 /* Default@2x.png in Resources */,
+				70415A711E2C492C006302B1 /* Launch Screen.storyboard in Resources */,
+				70415A771E2C4989006302B1 /* Default-568h@2x.png in Resources */,
+				70415A791E2C4989006302B1 /* Default-Portrait-736h@3x.png in Resources */,
 				700E31071E28789F009C8A7A /* Main.storyboard in Resources */,
-				708B2B6A1E26356F005B9069 /* LaunchScreen.storyboard in Resources */,
+				70415A7A1E2C4989006302B1 /* Default.png in Resources */,
 				708B2B671E26356F005B9069 /* Assets.xcassets in Resources */,
+				70415A781E2C4989006302B1 /* Default-667h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,17 +426,6 @@
 			targetProxy = 708B2B7C1E26356F005B9069 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		708B2B681E26356F005B9069 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				708B2B691E26356F005B9069 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		708B2B821E26356F005B9069 /* Debug */ = {
@@ -522,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -541,6 +551,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3Y69BC5249;
 				FRAMEWORK_SEARCH_PATHS = (
