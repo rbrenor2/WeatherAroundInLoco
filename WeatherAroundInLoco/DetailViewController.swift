@@ -13,25 +13,96 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var cityMaxLabel: UILabel!
     @IBOutlet weak var cityMinLabel: UILabel!
-    @IBOutlet weak var cityDescriptionLabel: UILabel!
-    
-    //Ad View
+
     
     var cityName:String = ""
     var cityMin:String = ""
     var cityMax:String = ""
     var cityDescription:String = ""
+    var cityDescriptionImageView = UIImageView()
+    var blurView = UIVisualEffectView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.isHidden = false
+        cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/2) - 80, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+        view.addSubview(cityDescriptionImageView)
+        switch cityDescription {
+        case "Clouds":
+            //clouds
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
+            rainAnimation()
+        case "overcast clouds":
+            //overcast clouds
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
+            rainAnimation()
+        case "Sky is Clear":
+            //clear
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "Sun")
+            iconAnimation(view: #imageLiteral(resourceName: "Sun"))
+        case "broken clouds":
+            //
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "cloudSun")
+            iconAnimation(view: #imageLiteral(resourceName: "cloudSun"))
+        case "light rain":
+            //
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "cloudsunRain")
+            iconAnimation(view: #imageLiteral(resourceName: "cloudsunRain"))
+        default:
+            cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
+            rainAnimation()
+        }
         
         self.title = cityName
         cityMinLabel.text = cityMin + " " + "℃"
         cityMaxLabel.text = cityMax + " " + "℃"
-        cityDescriptionLabel.text = cityDescription
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+    
+    
+    func rainAnimation(){
+        //creates 10 views
+        (0...200).forEach {(_) in
+            let randomTime = drand48()*10
+            DispatchQueue.main.asyncAfter(deadline: .now() + randomTime, execute: {
+                self.iconAnimation(view: #imageLiteral(resourceName: "drop"))
+            })
+        }
+        blurringDegrees()
+    }
+    
+    
+    func blurringDegrees(){
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        blurView.effect = blurEffect
+        blurView.frame = cityMaxLabel.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cityMaxLabel.addSubview(blurView)
+    }
+    
+    func handleTap(){
+        //creates 10 views
+        (0...10).forEach {(_) in
+                iconAnimation(view: #imageLiteral(resourceName: "drop"))
+        }
+    }
+    
+    func iconAnimation(view: UIImage){
+        
+        let startPointX = ((self.cityDescriptionImageView.frame.midX + 20) - CGFloat(drand48() * 80))
+        let startPointY = (self.cityDescriptionImageView.frame.midY + 20)
+        
+        let bezierA = CGPoint.init(x: startPointX + 100, y: startPointY + 100)
+        let bezierB = CGPoint.init(x: startPointX - 100, y: startPointY + 60)
+        
+        let path = Path.curvedHorizontalPath(startPoint: CGPoint.init(x:startPointX, y: startPointY), endPoint: CGPoint.init(x: startPointX , y: self.view.frame.height + 10), bezierPointA: bezierA, bezierPointB: bezierB, randomnessAdd: 200, randomnessMultiplier: 100)
+        
+        Animation.animationParticles(view: self.view, view1: view, view2: view, viewRandomnessBalance: 0.5, viewDimensionRandomnessAdd: 10, viewDimensionsRandomnessMultiplier: 10, durationRandomnessAdd: 2, durationRandomnessMultiplier: 3, path: path)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,7 +114,6 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

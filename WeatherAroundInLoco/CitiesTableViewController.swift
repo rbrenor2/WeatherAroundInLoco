@@ -29,7 +29,6 @@ class CitiesTableViewController: UITableViewController{
         
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         self.tableView.reloadData()
         self.navigationController?.navigationBar.isHidden = true
@@ -94,7 +93,6 @@ class CitiesTableViewController: UITableViewController{
             destinationViewController.cityName = selectedCity.cityName
             destinationViewController.cityMin = NSString(format:"%.1f", selectedCity.cityMin) as String
             destinationViewController.cityMax = NSString(format:"%.1f", selectedCity.cityMax) as String
-            
             destinationViewController.cityDescription = selectedCity.cityDescription
         }
        
