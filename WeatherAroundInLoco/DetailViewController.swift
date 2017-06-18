@@ -28,32 +28,43 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.isHidden = false
-        cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/2) - 80, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+        
+        //places the image outside sight
+        cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/10) - 100, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
         view.addSubview(cityDescriptionImageView)
+    
+        //animates the imageview to its final position
+        UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 2, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+                self.cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/2) - 80, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+        }), completion: {(Bool) in
+                self.rainAnimation()
+            })
+        
+        
         switch cityDescription {
         case "Clouds":
             //clouds
             cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
-            rainAnimation()
+            //rainAnimation()
         case "overcast clouds":
             //overcast clouds
             cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
-            rainAnimation()
+            //rainAnimation()
         case "Sky is Clear":
             //clear
             cityDescriptionImageView.image = #imageLiteral(resourceName: "Sun")
-            iconAnimation(view: #imageLiteral(resourceName: "Sun"))
+            //iconAnimation(view: #imageLiteral(resourceName: "Sun"))
         case "broken clouds":
             //
             cityDescriptionImageView.image = #imageLiteral(resourceName: "cloudSun")
-            iconAnimation(view: #imageLiteral(resourceName: "cloudSun"))
+            //iconAnimation(view: #imageLiteral(resourceName: "cloudSun"))
         case "light rain":
             //
             cityDescriptionImageView.image = #imageLiteral(resourceName: "cloudsunRain")
-            iconAnimation(view: #imageLiteral(resourceName: "cloudsunRain"))
+            //iconAnimation(view: #imageLiteral(resourceName: "cloudsunRain"))
         default:
             cityDescriptionImageView.image = #imageLiteral(resourceName: "clouds-2")
-            rainAnimation()
+            //rainAnimation()
         }
         
         self.title = cityName
@@ -66,13 +77,13 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     
     func rainAnimation(){
         //creates 10 views
-        (0...200).forEach {(_) in
+        (0...100).forEach {(_) in
             let randomTime = drand48()*10
             DispatchQueue.main.asyncAfter(deadline: .now() + randomTime, execute: {
                 self.iconAnimation(view: #imageLiteral(resourceName: "drop"))
             })
         }
-        blurringDegrees()
+        //blurringDegrees()
     }
     
     
@@ -87,7 +98,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     func handleTap(){
         //creates 10 views
         (0...10).forEach {(_) in
-                iconAnimation(view: #imageLiteral(resourceName: "drop"))
+            iconAnimation(view: #imageLiteral(resourceName: "drop"))
         }
     }
     
