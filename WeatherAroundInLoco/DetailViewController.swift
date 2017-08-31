@@ -30,15 +30,42 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         self.navigationController?.navigationBar.isHidden = false
         
         //places the image outside sight
-        cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/10) - 100, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+        cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/10) - 200, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+        
+        cityMaxLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
+        cityMinLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
+        
+        cityMaxLabel.alpha = 0
+        cityMinLabel.alpha = 0
         view.addSubview(cityDescriptionImageView)
     
         //animates the imageview to its final position
-        UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 2, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+        UIView.animate(withDuration: 1.5, delay: 2, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+            
+            self.cityMaxLabel.frame = CGRect(x: self.view.frame.height/2 , y: self.view.frame.width/2, width: 37.5, height: 65)
+            
+        }), completion: {(Bool) in
+            self.rainAnimation()
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 2.5, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+            self.cityMinLabel.frame = CGRect(x: self.view.frame.height/2, y: self.view.frame.width/2, width: 37.5, height: 65)
+            self.cityMinLabel.alpha = 1
+            
+            
+        }), completion: {(Bool) in
+            self.rainAnimation()
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: ({
                 self.cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/2) - 80, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
+    
         }), completion: {(Bool) in
                 self.rainAnimation()
             })
+        
+        
+
         
         
         switch cityDescription {
@@ -74,10 +101,17 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
+    func alphaAnimation(image:UIImageView){
+        let alphaAnimation = CABasicAnimation(keyPath: "opacity")
+        alphaAnimation.fromValue = 0
+        alphaAnimation.toValue = 1
+        
+    }
+    
     
     func rainAnimation(){
         //creates 10 views
-        (0...100).forEach {(_) in
+        (0...60).forEach {(_) in
             let randomTime = drand48()*10
             DispatchQueue.main.asyncAfter(deadline: .now() + randomTime, execute: {
                 self.iconAnimation(view: #imageLiteral(resourceName: "drop"))
@@ -115,10 +149,11 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         Animation.animationParticles(view: self.view, view1: view, view2: view, viewRandomnessBalance: 0.5, viewDimensionRandomnessAdd: 10, viewDimensionsRandomnessMultiplier: 10, durationRandomnessAdd: 2, durationRandomnessMultiplier: 3, path: path)
         
     }
+    //Used to display In Loco's Ad
     
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.post(name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        NotificationCenter.default.post(name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

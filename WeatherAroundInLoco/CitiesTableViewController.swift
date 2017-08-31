@@ -33,17 +33,18 @@ class CitiesTableViewController: UITableViewController{
         self.tableView.reloadData()
         self.navigationController?.navigationBar.isHidden = true
     }
+    //Ad Inloco View Controller
     
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
-        
-        self.navigationController?.navigationBar.isHidden = false
-
-    }
-    
-    func methodOfReceivedNotification(notification:Notification){
-        self.performSegue(withIdentifier: "showAdSegue", sender: self)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("GoingBackFromDetailViewController"), object: nil)
+//        
+//        self.navigationController?.navigationBar.isHidden = false
+//
+//    }
+//    
+//    func methodOfReceivedNotification(notification:Notification){
+//        self.performSegue(withIdentifier: "showAdSegue", sender: self)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
