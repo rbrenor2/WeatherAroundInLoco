@@ -13,6 +13,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var cityMaxLabel: UILabel!
     @IBOutlet weak var cityMinLabel: UILabel!
+    @IBOutlet weak var cityPhotoImage: UIImageView!
 
     
     var cityName:String = ""
@@ -25,48 +26,59 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cityPhotoImage.alpha = 0
         
+        getCityImages()
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.isHidden = false
         
         //places the image outside sight
         cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/10) - 200, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
         
-        cityMaxLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
-        cityMinLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
+//        cityMaxLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
+//        cityMinLabel.frame = CGRect(x: (self.view.frame.width/2), y: (self.view.frame.height) + 100, width: 37.5, height: 65)
+        self.cityMaxLabel.frame = CGRect(x: self.view.frame.height/2 , y: self.view.frame.width/2, width: 37.5, height: 65)
+        self.cityMinLabel.frame = CGRect(x: self.view.frame.height/2, y: self.view.frame.width/2, width: 37.5, height: 65)
+
         
         cityMaxLabel.alpha = 0
         cityMinLabel.alpha = 0
         view.addSubview(cityDescriptionImageView)
     
         //animates the imageview to its final position
-        UIView.animate(withDuration: 1.5, delay: 2, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
-            
-            self.cityMaxLabel.frame = CGRect(x: self.view.frame.height/2 , y: self.view.frame.width/2, width: 37.5, height: 65)
-            
-        }), completion: {(Bool) in
-            self.rainAnimation()
-        })
-        
-        UIView.animate(withDuration: 1.5, delay: 2.5, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
-            self.cityMinLabel.frame = CGRect(x: self.view.frame.height/2, y: self.view.frame.width/2, width: 37.5, height: 65)
-            self.cityMinLabel.alpha = 1
-            
-            
-        }), completion: {(Bool) in
-            self.rainAnimation()
-        })
+//        UIView.animate(withDuration: 1.5, delay: 2, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+//            self.cityMaxLabel.frame = CGRect(x: self.view.frame.height/2 , y: self.view.frame.width/2, width: 37.5, height: 65)
+//            
+//        }), completion: {(Bool) in
+//            self.rainAnimation()
+//        })
+//        
+//        UIView.animate(withDuration: 1.5, delay: 2.5, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+//            self.cityMinLabel.frame = CGRect(x: self.view.frame.height/2, y: self.view.frame.width/2, width: 37.5, height: 65)
+//        }), completion: {(Bool) in
+//            self.rainAnimation()
+//        })
         
         UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: ({
                 self.cityDescriptionImageView.frame = CGRect(x: (self.view.frame.width/2) - 80, y: (self.view.frame.height/4) - 30, width: 150, height: 150)
     
         }), completion: {(Bool) in
-                self.rainAnimation()
-            })
+            
+                //self.cityMaxLabel.alpha = 1
+                //self.cityMinLabel.alpha = 1
+        })
         
-        
+        UIView.animate(withDuration: 1, delay: 0.25, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 3), animations: ({
+            self.cityMaxLabel.alpha = 1
+        }), completion: {(Bool) in
+            //self.rainAnimation()
+        })
+        UIView.animate(withDuration: 1, delay: 0.75, usingSpringWithDamping: 3, initialSpringVelocity: 5, options: UIViewAnimationOptions(rawValue: 3), animations: ({
+            self.cityMinLabel.alpha = 1
+        }), completion: {(Bool) in
+            //self.rainAnimation()
+        })
 
-        
         
         switch cityDescription {
         case "Clouds":
@@ -95,8 +107,10 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         }
         
         self.title = cityName
-        cityMinLabel.text = cityMin + " " + "℃"
-        cityMaxLabel.text = cityMax + " " + "℃"
+//        cityMinLabel.text = cityMin + " " + "℃"
+//        cityMaxLabel.text = cityMax + " " + "℃"
+        cityMinLabel.text = cityMin
+        cityMaxLabel.text = cityMax
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
@@ -108,6 +122,36 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
+    func getCityImages(){
+        
+        
+        FlickrProvider.fetchPhotosForSearchText(searchText: cityName) { (error, cityPhotoArray) in
+            let cityPhotoUrl:URL = cityPhotoArray?[0].photoUrl as! URL
+            DispatchQueue.global(qos: .userInitiated).async {
+                do{
+                    print("tentandoConverter")
+                    let data = try Data.init(contentsOf: cityPhotoUrl)
+                    let image = UIImage.init(data: data)
+                    
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 3, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: ({
+                            self.cityPhotoImage.image = image
+                            self.cityPhotoImage.alpha = 0.3
+                        }), completion: {(Bool) in
+                        
+                        })
+
+                    }
+                }catch _{
+                    ErrorHandler.errorAlert(message: ErrorType.couldNotDownloadDataError.rawValue, viewController: self)
+                    print("deuErro")
+
+                    return
+                }
+            }
+
+        }
+    }
     
     func rainAnimation(){
         //creates 10 views
